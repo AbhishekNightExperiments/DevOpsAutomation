@@ -28,10 +28,15 @@ google = oauth.remote_app('google',
 
 
 @app.route('/')
-def index():
+def home():
+    return render_template("home.html")
+
+
+@app.route('/login')
+def login():
     access_token = session.get('access_token')
     if access_token is None:
-        return redirect(url_for('login'))
+        return redirect(url_for('lwg'))
 
     access_token = access_token[0]
     from urllib2 import Request, urlopen, URLError
@@ -45,14 +50,15 @@ def index():
         if e.code == 401:
             # Unauthorized - bad token
             session.pop('access_token', None)
-            return redirect(url_for('login'))
+            return redirect(url_for('lwg'))
         return res.read()
 
     return res.read()
 
 
-@app.route('/login')
-def login():
+@app.route('/lwg')
+def lwg():
+    # lwg-login with google
     callback = url_for('authorized', _external=True)
     return google.authorize(callback=callback)
 
