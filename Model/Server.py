@@ -32,6 +32,7 @@ class User(Base):
     created_at = Column(DateTime, default=dt.datetime.utcnow())
 
 
+
 class Roles(Base):
     """ This Class Store the Detail of the User"""
     __tablename__ = "Roles"
