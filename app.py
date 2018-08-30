@@ -70,6 +70,11 @@ def get_access_token():
     return session.get('access_token')
 
 
+@app.route("/registration")
+def admin():
+    return render_template("registration.html")
+
+
 # @app.route("/")
 # def home():
 #     return render_template("home.html")
